@@ -9,10 +9,10 @@
             --bg-top: #70d6ff;
             --bg-mid: #99e2b4;
             --bg-bottom: #e8fcc2;
-            --glass-bg: rgba(255, 255, 255, 0.55);
-            --glass-card: rgba(255, 255, 255, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.85);
-            --glass-shadow: 0 10px 32px rgba(0, 119, 182, 0.18);
+            --glass-bg: rgba(255, 255, 255, 0.92);
+            --glass-card: rgba(255, 255, 255, 0.94);
+            --glass-border: rgba(255, 255, 255, 0.95);
+            --glass-shadow: 0 4px 16px rgba(0, 119, 182, 0.10);
             --accent-blue: #0096c7;
             --accent-green: #2ec4b6;
             --text-dark: #003049;
@@ -36,6 +36,25 @@
             background: linear-gradient(160deg, var(--bg-top) 0%, var(--bg-mid) 50%, var(--bg-bottom) 100%);
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-dark);
+            contain: content;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* High-Performance Custom Scrollbar for Chrome OS Trackpads */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 119, 182, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 119, 182, 0.6);
         }
 
         .bubble {
@@ -45,29 +64,29 @@
             box-shadow: inset -2px -2px 6px rgba(0, 119, 182, 0.2), inset 2px 2px 5px rgba(255, 255, 255, 0.9);
             pointer-events: none;
             animation: floatBubble 14s infinite ease-in-out;
+            will-change: transform;
+            transform: translateZ(0);
             z-index: 1;
         }
 
         @keyframes floatBubble {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-25px) scale(1.05); }
+            0%, 100% { transform: translateY(0) scale(1) translateZ(0); }
+            50% { transform: translateY(-25px) scale(1.05) translateZ(0); }
         }
 
         #app-header {
-            min-height: 60px;
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            min-height: 52px;
+            background: rgba(255, 255, 255, 0.92);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.12);
+            box-shadow: 0 2px 10px rgba(0, 119, 182, 0.08);
             z-index: 50;
             position: relative;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
 
         #notice-banner {
@@ -75,13 +94,16 @@
             color: #7f4f24;
             text-align: center;
             font-size: 0.85rem;
-            padding: 7px 38px 7px 16px;
+            padding: 7px 36px 7px 16px;
             font-weight: 700;
             letter-spacing: 0.3px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.9);
             box-shadow: 0 2px 8px rgba(127, 79, 36, 0.12);
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close-banner-btn {
@@ -92,29 +114,27 @@
             background: transparent;
             border: none;
             color: #7f4f24;
-            font-size: 0.9rem;
-            font-weight: 800;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
             padding: 2px 6px;
-            border-radius: 8px;
+            border-radius: 50%;
             line-height: 1;
-            transition: all 0.2s ease;
         }
 
         .close-banner-btn:hover {
             background: rgba(127, 79, 36, 0.15);
-            color: #4a2c11;
         }
 
         .left-controls {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 900;
             background: linear-gradient(180deg, #0077b6 0%, #03045e 100%);
             -webkit-background-clip: text;
@@ -125,15 +145,6 @@
             gap: 6px;
             filter: drop-shadow(0 2px 2px rgba(255,255,255,0.8));
             white-space: nowrap;
-        }
-
-        .btn-disguise {
-            background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 100%);
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-        .btn-disguise:hover {
-            background: linear-gradient(180deg, #ffffff 0%, #a7f3d0 100%);
         }
 
         .select-wrapper {
@@ -147,26 +158,26 @@
             background: linear-gradient(180deg, #ffffff 0%, #e0f2fe 100%);
             color: var(--text-dark);
             border: 1px solid var(--glass-border);
-            padding: 7px 32px 7px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 6px 30px 6px 12px;
+            border-radius: 18px;
+            font-size: 0.83rem;
             font-weight: 700;
             cursor: pointer;
             outline: none;
-            transition: all 0.25s ease;
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 3px 8px rgba(0, 119, 182, 0.15);
+            transition: all 0.2s ease;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 2px 6px rgba(0, 119, 182, 0.12);
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
-            max-width: 280px;
+            max-width: 250px;
         }
 
         .select-wrapper::after {
             content: "▼";
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--accent-blue);
             position: absolute;
-            right: 12px;
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
             pointer-events: none;
@@ -174,7 +185,7 @@
 
         select.game-selector:hover {
             background: linear-gradient(180deg, #ffffff 0%, #bae6fd 100%);
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 1), 0 5px 12px rgba(0, 119, 182, 0.25);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 1), 0 4px 10px rgba(0, 119, 182, 0.18);
         }
 
         optgroup {
@@ -201,26 +212,26 @@
             background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
             color: var(--text-dark);
             border: 1px solid #ffffff;
-            padding: 6px 12px;
-            border-radius: 18px;
+            padding: 5px 11px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 4px;
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 2px 6px rgba(0, 0, 0, 0.12);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.9), 0 2px 5px rgba(0, 0, 0, 0.10);
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
             white-space: nowrap;
-            height: 34px;
+            height: 32px;
         }
 
         .btn:hover {
             background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
             transform: translateY(-1px);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,1), 0 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,1), 0 3px 8px rgba(0, 0, 0, 0.14);
         }
 
         .btn:active {
@@ -232,17 +243,17 @@
             color: #ffffff;
             border: 1px solid #ffe3a8;
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 3px 10px rgba(232, 93, 4, 0.35);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 3px 8px rgba(232, 93, 4, 0.3);
         }
 
         .btn-primary:hover {
             background: linear-gradient(180deg, #ffd000 0%, #ffaa00 50%, #f48c06 100%);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 5px 14px rgba(232, 93, 4, 0.45);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 4px 12px rgba(232, 93, 4, 0.4);
         }
 
         #content-area {
             width: 100vw;
-            height: calc(100vh - 90px);
+            height: calc(100vh - 82px);
             position: relative;
             z-index: 10;
         }
@@ -251,7 +262,7 @@
             width: 100%;
             height: 100%;
             overflow-y: auto;
-            padding: 30px 16px;
+            padding: 24px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -272,79 +283,66 @@
             background: linear-gradient(180deg, #ffffff 0%, #e0f2fe 100%);
             border: 1px solid var(--glass-border);
             color: var(--accent-blue);
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 5px 16px;
+            border-radius: 18px;
+            font-size: 0.78rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 12px rgba(0, 119, 182, 0.15);
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 10px rgba(0, 119, 182, 0.12);
         }
 
         .home-title {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 900;
             color: #03045e;
-            margin-bottom: 12px;
-            letter-spacing: -1px;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
             text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
         }
 
         .home-subtitle {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             color: var(--text-muted);
-            margin-bottom: 36px;
-            line-height: 1.6;
+            margin-bottom: 28px;
+            line-height: 1.5;
             font-weight: 600;
             max-width: 680px;
             margin-left: auto;
             margin-right: auto;
-            text-shadow: 0 1px 1px rgba(255,255,255,0.6);
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
+            gap: 16px;
+            margin-bottom: 28px;
             text-align: left;
         }
 
         .feature-card {
             background: var(--glass-card);
-            backdrop-filter: blur(12px);
-            padding: 24px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 18px;
             border: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .feature-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 40%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%);
-            pointer-events: none;
-        }
-
         .feature-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 36px rgba(0, 119, 182, 0.25);
-            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 24px rgba(0, 119, 182, 0.18);
+            background: rgba(255, 255, 255, 0.98);
         }
 
         .feature-card h3 {
             color: #023e8a;
-            font-size: 1.15rem;
-            margin-bottom: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -353,64 +351,59 @@
 
         .feature-card p {
             color: var(--text-muted);
-            font-size: 0.92rem;
-            line-height: 1.5;
+            font-size: 0.88rem;
+            line-height: 1.45;
             font-weight: 500;
         }
 
         .heads-up-card {
             background: linear-gradient(180deg, #fee2e2 0%, #fecaca 100%);
             border: 1px solid #f87171;
-            padding: 22px 26px;
-            border-radius: 20px;
-            margin-bottom: 32px;
+            padding: 18px 22px;
+            border-radius: 18px;
+            margin-bottom: 24px;
             text-align: left;
-            box-shadow: 0 10px 28px rgba(220, 38, 38, 0.12);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.1);
         }
 
         .heads-up-card h3 {
             color: #991b1b;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
             font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .heads-up-card p {
             color: #7f1d1d;
-            font-size: 0.93rem;
-            line-height: 1.55;
+            font-size: 0.9rem;
+            line-height: 1.45;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .search-bar-wrapper {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             width: 100%;
         }
 
         .search-bar {
             width: 100%;
-            padding: 14px 20px;
-            font-size: 1.05rem;
-            border-radius: 30px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            border-radius: 26px;
             border: 1px solid var(--glass-border);
             background: var(--glass-card);
-            backdrop-filter: blur(10px);
             outline: none;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05), var(--glass-shadow);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.04), var(--glass-shadow);
             color: var(--text-dark);
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .search-bar:focus {
             border-color: var(--accent-blue);
             box-shadow: 0 0 0 3px rgba(0, 150, 199, 0.25);
-            background: rgba(255,255,255,0.9);
+            background: #ffffff;
         }
 
         .directory-grid {
@@ -421,11 +414,11 @@
         }
 
         .dir-card {
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.85);
             border-radius: 16px;
             padding: 16px;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -445,26 +438,25 @@
             color: var(--text-muted);
             margin-bottom: 12px;
             word-break: break-all;
-            background: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.7);
             padding: 6px;
             border-radius: 8px;
             border: 1px dashed rgba(0,0,0,0.1);
         }
 
         .category-accordion {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 18px;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.08);
+            box-shadow: 0 2px 10px rgba(0, 119, 182, 0.06);
             margin-bottom: 16px;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: box-shadow 0.2s ease, background 0.2s ease;
         }
 
         .category-accordion:hover {
-            box-shadow: 0 8px 24px rgba(0, 119, 182, 0.15);
-            background: rgba(255, 255, 255, 0.65);
+            box-shadow: 0 4px 16px rgba(0, 119, 182, 0.12);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .category-header {
@@ -559,19 +551,18 @@
 
         .launcher-card {
             background: var(--glass-card);
-            backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 28px;
-            margin-bottom: 28px;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
             box-shadow: var(--glass-shadow);
             text-align: left;
         }
 
         .launcher-card h3 {
             color: #023e8a;
-            font-size: 1.3rem;
-            margin-bottom: 8px;
+            font-size: 1.25rem;
+            margin-bottom: 6px;
             font-weight: 800;
             display: flex;
             align-items: center;
@@ -580,32 +571,32 @@
 
         .launcher-card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .launcher-input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 11px 15px;
             background: #ffffff;
             border: 1px solid #cbd5e1;
-            border-radius: 14px;
+            border-radius: 12px;
             color: var(--text-dark);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             outline: none;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         textarea.launcher-input {
-            min-height: 160px;
+            min-height: 140px;
             resize: vertical;
             font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
         }
 
         .launcher-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: flex-end;
             flex-wrap: wrap;
         }
@@ -625,7 +616,6 @@
             width: 100vw;
             height: 100vh;
             background-color: rgba(0, 48, 73, 0.4);
-            backdrop-filter: blur(10px);
             z-index: 100;
             justify-content: center;
             align-items: center;
@@ -637,50 +627,50 @@
 
         .modal {
             background: linear-gradient(180deg, #ffffff 0%, #e0f2fe 100%);
-            padding: 32px;
-            border-radius: 24px;
+            padding: 28px;
+            border-radius: 20px;
             width: 90%;
             max-width: 460px;
-            box-shadow: 0 20px 50px rgba(0, 119, 182, 0.3);
+            box-shadow: 0 16px 40px rgba(0, 119, 182, 0.25);
             border: 1px solid #ffffff;
         }
 
         .modal h2 {
-            margin-bottom: 18px;
-            font-size: 1.35rem;
+            margin-bottom: 16px;
+            font-size: 1.3rem;
             color: #03045e;
             font-weight: 800;
         }
 
         .input-group {
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             text-align: left;
         }
 
         .input-group label {
             display: block;
-            font-size: 0.88rem;
-            margin-bottom: 6px;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
             color: var(--text-dark);
             font-weight: 700;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 10px 14px;
             background-color: #ffffff;
             border: 1px solid #cbd5e1;
-            border-radius: 12px;
+            border-radius: 10px;
             color: var(--text-dark);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
         }
 
         .modal-actions {
             display: flex;
             justify-content: flex-end;
-            gap: 12px;
-            margin-top: 24px;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .file-hidden {
@@ -697,31 +687,31 @@
 
     <header id="app-header">
         <div class="left-controls">
-            <div class="title" id="app-title-text">📐 Algebra Tools US</div>
+            <div class="title" id="app-title-text">Algebra Tools US</div>
             <div class="select-wrapper">
                 <select id="gameSelect" class="game-selector" onchange="switchGame(this.value)">
-                    <optgroup label="🛠️ Tools & Utilities">
+                    <optgroup label="Tools & Utilities">
                         <option value="home">Dashboard / Help</option>
                         <option value="directory">Resource Directory</option>
                         <option value="stealth">Stealth Workspace Session</option>
                         <option value="custom">Custom Document Launcher</option>
                     </optgroup>
-                    <!-- Options populated dynamically from encoded JS data registry to evade static keyword filters -->
+                    <!-- Dynamic Document Registry -->
                 </select>
             </div>
-            <!-- Servers Selector Dropdown Menu (Populated dynamically per game) -->
+            <!-- Dynamic Server Dropdown Selector -->
             <div class="select-wrapper" id="serverSelectWrapper">
-                <select id="serverSelect" class="game-selector" onchange="switchGameServer(this.value)" title="Select Game Server Mirror">
-                    <option value="">🌐 Server Menu</option>
+                <select id="serverSelect" class="game-selector" onchange="switchGameServer(this.value)" title="Select Document Server Mirror">
+                    <option value="">Server Menu</option>
                 </select>
             </div>
         </div>
         <div class="controls">
-            <button class="btn" onclick="openChangelogModal()">📢 Changelog</button>
-            <button class="btn btn-primary" onclick="openModal()">➕ Add Resource</button>
-            <button class="btn" onclick="openActiveInAboutBlank()">↗️ Open in Tab</button>
-            <button class="btn" onclick="reloadGame()">🔄 Reload</button>
-            <button class="btn" onclick="toggleFullScreen()">⛶ Fullscreen</button>
+            <button class="btn" onclick="openChangelogModal()">Changelog</button>
+            <button class="btn btn-primary" onclick="openModal()">Add Resource</button>
+            <button class="btn" onclick="openActiveInAboutBlank()">Open in Tab</button>
+            <button class="btn" onclick="reloadGame()">Reload</button>
+            <button class="btn" onclick="toggleFullScreen()">Fullscreen</button>
         </div>
     </header>
 
@@ -729,7 +719,7 @@
     <input type="file" id="modalFilePicker" class="file-hidden" accept=".html,.htm" onchange="handleModalFileSelect(event)" />
 
     <div id="notice-banner">
-        <span>💡 Click on the document to load emulator. If the website is blocked: click reload until unblocked, use a different server, or find another link in the user guide.</span>
+        <span>Click on the document to load emulator. If the website is blocked: click reload until unblocked, use a different server, or find another link in the user guide.</span>
         <button class="close-banner-btn" onclick="document.getElementById('notice-banner').style.display='none'" title="Dismiss banner">✕</button>
     </div>
 
@@ -740,44 +730,44 @@
                 <h1 class="home-title" id="home-title-text">Welcome to Algebra Tools US</h1>
                 <p class="home-subtitle" id="home-subtitle-text">Your unified productivity and resource portal for academic research, interactive simulators, document tools, and web utilities.</p>
 
-                <div class="heads-up-card" style="margin-bottom: 24px;">
-                    <h3>🚨 Loading or Display Issues?</h3>
+                <div class="heads-up-card">
+                    <h3>Loading or Display Issues?</h3>
                     <p>If an embedded tool gives an internal script warning or freeze, browser 3rd-party cookie isolation may be enabled.</p>
-                    <p><b>Quick Fix:</b> Click <b>🔄 Reload</b>, or use <b>↗️ Open in Tab</b> to launch the resource in a clean dedicated tab!</p>
+                    <p><b>Quick Fix:</b> Click <b>Reload</b>, or use <b>Open in Tab</b> to launch the resource in a clean dedicated tab!</p>
                 </div>
 
                 <div class="features-grid">
                     <div class="feature-card">
                         <div>
-                            <h3>📖 User Guide</h3>
+                            <h3>User Guide</h3>
                             <p>Access our comprehensive Google Docs guide for step-by-step instructions, troubleshooting tips, and documentation.</p>
                         </div>
-                        <a href="https://docs.google.com/document/d/1vykPfsY_HHSIg_VQGz1a_KXtaSMOSf3P-Bby-RPWa08/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:14px; width:100%; justify-content:center; text-decoration:none;">📄 Open Documentation</a>
+                        <a href="https://docs.google.com/document/d/1vykPfsY_HHSIg_VQGz1a_KXtaSMOSf3P-Bby-RPWa08/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:14px; width:100%; justify-content:center; text-decoration:none;">Open Documentation</a>
                     </div>
                     <div class="feature-card">
                         <div>
-                            <h3>📋 URL Directory</h3>
+                            <h3>URL Directory</h3>
                             <p>Select <b>Resource Directory</b> in the dropdown to view, search, and copy the source links for every single pre-loaded module.</p>
                         </div>
                     </div>
                     <div class="feature-card">
                         <div>
-                            <h3>🥷 Stealth Bypass</h3>
-                            <p>Use the <b>Stealth Bypass Cloaker</b> from the menu to cloak your game traffic inside a hidden about:blank tab, avoiding local network extensions.</p>
+                            <h3>Stealth Bypass</h3>
+                            <p>Use the <b>Stealth Workspace Session</b> to cloak your session traffic inside a hidden about:blank tab, bypassing local extensions.</p>
                         </div>
                     </div>
                     <div class="feature-card">
                         <div>
-                            <h3>🛠️ Custom Launcher</h3>
-                            <p>Select <b>Custom Launcher</b> to launch any URL, paste raw HTML code, or upload local HTML game files into an <b>about:blank</b> window!</p>
+                            <h3>Custom Launcher</h3>
+                            <p>Select <b>Custom Launcher</b> to launch any URL, paste raw HTML code, or upload local HTML document files into an <b>about:blank</b> window!</p>
                         </div>
                     </div>
                     <div class="feature-card">
                         <div>
-                            <h3>💾 Download Source</h3>
-                            <p>Download the complete Web Arcade HTML source code directly to your device for offline use and saving/cloaking purposes.</p>
+                            <h3>Download Source</h3>
+                            <p>Download the complete HTML source code directly to your device for offline use and saving/cloaking purposes.</p>
                         </div>
-                        <button class="btn btn-primary" style="margin-top:14px; width:100%; justify-content:center;" onclick="downloadWebsiteCode()">💾 Download index.html</button>
+                        <button class="btn btn-primary" style="margin-top:14px; width:100%; justify-content:center;" onclick="downloadWebsiteCode()">Download index.html</button>
                     </div>
                 </div>
 
@@ -792,11 +782,11 @@
                 
                 <div class="accordion-toolbar">
                     <div class="search-bar-wrapper" style="margin-bottom:0; flex:1;">
-                        <input type="text" id="dirSearch" class="search-bar" placeholder="🔍 Search resources or URLs..." onkeyup="filterDirectory()">
+                        <input type="text" id="dirSearch" class="search-bar" placeholder="Search resources or URLs..." onkeyup="filterDirectory()">
                     </div>
                     <div class="accordion-actions">
-                        <button class="btn" onclick="expandAllCategories()">📂 Expand All</button>
-                        <button class="btn" onclick="collapseAllCategories()">📁 Collapse All</button>
+                        <button class="btn" onclick="expandAllCategories()">Expand All</button>
+                        <button class="btn" onclick="collapseAllCategories()">Collapse All</button>
                     </div>
                 </div>
                 
@@ -811,13 +801,13 @@
                 <p class="home-subtitle">Bypass extension trackers using multi-tier about:blank window generation, URL obfuscation, srcdoc streaming, and Panic Key protection.</p>
 
                 <div class="heads-up-card" style="margin-bottom: 20px; background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%); border-color: #38bdf8;">
-                    <h3 style="color: #0369a1;">💡 Why standard DOM shields get bypassed</h3>
-                    <p style="color: #0c4a6e;">Monitoring extensions operate above web pages using Chrome's <code>declarativeNetRequest</code> API and subframe content scripts. They inspect network requests and subframes directly, ignoring page-level Shadow DOM.</p>
-                    <p style="color: #0c4a6e; margin-bottom:0;"><b>The Solution:</b> Use our <b>Srcdoc & Blob Stream Engine</b> below paired with <b>Base64 Obfuscation</b> and <b>Panic Hotkey Protection</b> to mask memory signatures and prevent string detection.</p>
+                    <h3 style="color: #0369a1;">Why standard DOM shields get bypassed</h3>
+                    <p style="color: #0c4a6e;">Monitoring extensions operate above web pages using Chrome's <code>declarativeNetRequest</code> API and subframe content scripts. They inspect network requests and subframes directly.</p>
+                    <p style="color: #0c4a6e; margin-bottom:0;"><b>The Solution:</b> Use our <b>Srcdoc & Blob Stream Engine</b> below paired with <b>Base64 Obfuscation</b> and <b>Panic Hotkey Protection</b> to mask memory signatures.</p>
                 </div>
 
                 <div class="launcher-card">
-                    <h3>🥷 Advanced Shielded Stealth Session</h3>
+                    <h3>Advanced Shielded Stealth Session</h3>
                     <p>Enter a web address below to launch a fully masked <code>about:blank</code> environment equipped with panic hotkey triggers and referrer wiping.</p>
                     
                     <div class="input-group">
@@ -829,22 +819,22 @@
                         <div class="input-group" style="margin-bottom:0;">
                             <label for="stealthPreset">Disguise Mask (Tab Title & Favicon)</label>
                             <select id="stealthPreset" class="launcher-input" style="padding: 10px;">
-                                <option value="desmos">💚 Desmos Graphing Calculator</option>
-                                <option value="google">🔍 Google Search</option>
-                                <option value="drive">📁 Google Drive</option>
-                                <option value="classroom">📚 Google Classroom</option>
-                                <option value="canvas">🎓 Canvas LMS</option>
-                                <option value="wikipedia">📝 Wikipedia</option>
+                                <option value="desmos">Desmos Graphing Calculator</option>
+                                <option value="google">Google Search</option>
+                                <option value="drive">Google Drive</option>
+                                <option value="classroom">Google Classroom</option>
+                                <option value="canvas">Canvas LMS</option>
+                                <option value="wikipedia">Wikipedia</option>
                             </select>
                         </div>
 
                         <div class="input-group" style="margin-bottom:0;">
                             <label for="stealthIsolationMode">Stealth Engine</label>
                             <select id="stealthIsolationMode" class="launcher-input" style="padding: 10px;">
-                                <option value="srcdoc">⚡ Srcdoc & Blob Stream (Hides iframe URL parameter)</option>
-                                <option value="obfuscated">🔐 Base64 Obfuscated Memory Window</option>
-                                <option value="shadow">🛡️ Closed Shadow DOM + Mutation Guard</option>
-                                <option value="strict">🔒 Strict Sandbox Decoupled Window</option>
+                                <option value="srcdoc">Srcdoc & Blob Stream (Hides iframe URL parameter)</option>
+                                <option value="obfuscated">Base64 Obfuscated Memory Window</option>
+                                <option value="shadow">Closed Shadow DOM + Mutation Guard</option>
+                                <option value="strict">Strict Sandbox Decoupled Window</option>
                             </select>
                         </div>
                     </div>
@@ -852,14 +842,15 @@
                     <div class="input-group" style="margin-bottom:16px;">
                         <label for="panicKeyInput">Panic / Boss Hotkey (Instantly redirects tab to Google)</label>
                         <select id="panicKeyInput" class="launcher-input" style="padding: 10px;">
-                            <option value="Escape">Press ESC Key</option>
+                            <option value="Escape">Press ESC Key (Chromebook / PC)</option>
                             <option value="`">Press ` (Backtick) Key</option>
                             <option value="F2">Press F2 Key</option>
+                            <option value="SearchEsc">Search + ESC (Chrome OS Special)</option>
                         </select>
                     </div>
                     
                     <div class="launcher-actions">
-                        <button class="btn btn-primary" onclick="launchStealth()">↗️ Launch Stealth Tab</button>
+                        <button class="btn btn-primary" onclick="launchStealth()">Launch Stealth Tab</button>
                     </div>
                 </div>
             </div>
@@ -869,34 +860,34 @@
             <div class="home-container">
                 <span class="badge">Custom Studio</span>
                 <h1 class="home-title">Custom Website & File Launcher</h1>
-                <p class="home-subtitle">Open website URLs, local .html game files (e.g. EaglercraftX), or raw HTML code in clean isolated tabs.</p>
+                <p class="home-subtitle">Open website URLs, local .html document files, or raw HTML code in clean isolated tabs.</p>
 
                 <div class="launcher-card">
-                    <h3>🌐 1. Launch URL in about:blank Tab</h3>
+                    <h3>1. Launch URL in about:blank Tab</h3>
                     <p>Enter a website address below. It will open in a new <code>about:blank</code> tab containing an iframe for clean viewing.</p>
                     <input type="url" id="customUrlInput" class="launcher-input" placeholder="https://example.com" />
                     <div class="launcher-actions">
-                        <button class="btn btn-primary" onclick="launchUrlAboutBlank()">🚀 Launch URL in about:blank</button>
+                        <button class="btn btn-primary" onclick="launchUrlAboutBlank()">Launch URL in about:blank</button>
                     </div>
                 </div>
 
                 <div class="launcher-card">
-                    <h3>⛏️ 2. Launch Local HTML Game File</h3>
-                    <p>Select an offline HTML game file from your computer to run it.</p>
+                    <h3>2. Launch Local HTML File</h3>
+                    <p>Select an offline HTML document or emulator file from your computer to run it.</p>
                     <input type="file" id="localHtmlFile" class="launcher-input" accept=".html,.htm" onchange="if(this.files[0]) showFileStatus('Selected: ' + this.files[0].name);" />
                     <div id="localFileStatus" style="font-size:0.88rem; font-weight:700; margin-bottom:12px; color:var(--text-dark);"></div>
                     <div class="launcher-actions">
-                        <button class="btn" onclick="launchLocalFileInApp()">🎮 Play in Arcade</button>
-                        <button class="btn btn-primary" onclick="launchLocalFileAboutBlank()">🚀 Launch in about:blank Tab</button>
+                        <button class="btn" onclick="launchLocalFileInApp()">Play in Workspace</button>
+                        <button class="btn btn-primary" onclick="launchLocalFileAboutBlank()">Launch in about:blank Tab</button>
                     </div>
                 </div>
 
                 <div class="launcher-card">
-                    <h3>📄 3. Run HTML Code in about:blank Tab</h3>
+                    <h3>3. Run HTML Code in about:blank Tab</h3>
                     <p>Paste custom HTML/CSS/JS code below. It will run inside a brand new, isolated <code>about:blank</code> browser tab.</p>
-                    <textarea id="customHtmlInput" class="launcher-input" placeholder="<!DOCTYPE html>&#10;<html>&#10;<head><title>My Game</title></head>&#10;<body>&#10;<h1>Hello World!</h1>&#10;</body>&#10;</html>"></textarea>
+                    <textarea id="customHtmlInput" class="launcher-input" placeholder="<!DOCTYPE html>&#10;<html>&#10;<head><title>Document</title></head>&#10;<body>&#10;<h1>Hello World!</h1>&#10;</body>&#10;</html>"></textarea>
                     <div class="launcher-actions">
-                        <button class="btn btn-primary" onclick="launchAboutBlank()">🚀 Launch HTML in about:blank</button>
+                        <button class="btn btn-primary" onclick="launchAboutBlank()">Launch HTML in about:blank</button>
                     </div>
                 </div>
             </div>
@@ -908,22 +899,22 @@
     <div id="changelogModal" class="modal-overlay active" onclick="if(event.target === this) closeChangelogModal();">
         <div class="modal" style="max-width: 520px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <h2 style="margin-bottom: 0;">📢 Changelog</h2>
+                <h2 style="margin-bottom: 0;">Changelog</h2>
                 <button class="btn" onclick="closeChangelogModal()" style="padding: 4px 10px; font-size: 0.8rem;">✕</button>
             </div>
             <div style="text-align: left; margin-bottom: 20px;">
                 <ul style="list-style-type: none; padding-left: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.92rem; color: var(--text-dark);">
                     <li style="background: rgba(255,255,255,0.65); padding: 10px 14px; border-radius: 12px; border: 1px solid var(--glass-border); line-height: 1.4;">
-                        <strong>🔗 Main Link Updated:</strong> The site link is now different.
+                        <strong>Main Link Updated:</strong> The site link is now different.
                     </li>
                     <li style="background: rgba(255,255,255,0.65); padding: 10px 14px; border-radius: 12px; border: 1px solid var(--glass-border); line-height: 1.4;">
-                        <strong>🎮 Game Links Redone:</strong> All game links have been redone. Any removed games may return in future updates!
+                        <strong>Game Links Redone:</strong> All game links have been redone. Any removed games may return in future updates!
                     </li>
                     <li style="background: rgba(255,255,255,0.65); padding: 10px 14px; border-radius: 12px; border: 1px solid var(--glass-border); line-height: 1.4;">
-                        <strong>🌐 Proxy Links Redone:</strong> All proxy mirror links have been redone and refreshed.
+                        <strong>Proxy Links Redone:</strong> All proxy mirror links have been redone and refreshed.
                     </li>
                     <li style="background: rgba(255,255,255,0.65); padding: 10px 14px; border-radius: 12px; border: 1px solid var(--glass-border); line-height: 1.4;">
-                        <strong>🛡️ Pop-up Ads Blocked:</strong> Pop-up ads on proxies have been blocked (<strong>fern</strong> is now usable!).
+                        <strong>Pop-up Ads Blocked:</strong> Pop-up ads on proxies have been blocked (<strong>fern</strong> is now usable!).
                     </li>
                 </ul>
             </div>
@@ -946,7 +937,7 @@
             </div>
             <div class="input-group">
                 <label>Or Choose Offline File (.html):</label>
-                <button class="btn" style="width:100%; justify-content:center;" onclick="document.getElementById('modalFilePicker').click()">📁 Select Local HTML File</button>
+                <button class="btn" style="width:100%; justify-content:center;" onclick="document.getElementById('modalFilePicker').click()">Select Local HTML File</button>
                 <span id="modalFileSelectedLabel" style="font-size:0.8rem; color: var(--text-muted); display:block; margin-top:4px; text-align:center;"></span>
             </div>
             <div class="modal-actions">
@@ -957,65 +948,78 @@
     </div>
 
     <script>
-        // Game registry with game-specific server mirrors
+        // Global variables & state tracking
+        let isAcademicDisguiseActive = false;
+        let selectedServerIndex = 0;
+        let activeGameItem = null;
+        let currentActiveUrl = 'home';
+        let pendingModalBlobUrl = '';
+        let pendingModalHtmlContent = '';
+
+        // Unified Document & Game Registry
         const ENCODED_REGISTRY = [
             {
-                group: "🏎️ Racing & Driving",
-                disguiseGroup: "📐 Physics & Kinematics Simulators",
+                group: "Racing & Driving",
+                disguiseGroup: "Physics & Kinematics Simulators",
                 items: [
                     { 
                         id: "nfs-underground",
                         name: "Need for Speed: Underground", 
                         servers: [
-                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Underground/" }
+                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Underground/" },
+                            { name: "Server 2", url: "https://classicjoy.games/embed?slug=need-for-speed-underground" }
                         ]
                     },
                     { 
                         id: "nfs-underground-2",
                         name: "Need for Speed: Underground 2", 
                         servers: [
-                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Underground-2/" }
+                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Underground-2/" },
+                            { name: "Server 2", url: "https://classicjoy.games/embed?slug=need-for-speed-underground-2" }
                         ]
                     },
                     { 
                         id: "nfs-mw",
                         name: "Need for Speed: Most Wanted", 
                         servers: [
-                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/MW/" }
+                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/MW/" },
+                            { name: "Server 2", url: "https://classicjoy.games/embed?slug=need-for-speed-most-wanted" }
                         ]
                     },
                     { 
                         id: "nfs-carbon",
                         name: "Need for Speed: Carbon", 
                         servers: [
-                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Carbon/" }
-                        ]
-                    },
-                    { 
-                        id: "colin-mcrae-2",
-                        name: "Colin McRae Rally 2.0", 
-                        servers: [
-                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Colin-McRae-2/" }
-                        ]
-                    },
-                    { 
-                        id: "gran-turismo",
-                        name: "Gran Turismo", 
-                        servers: [
-                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/GT/" }
+                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Carbon/" },
+                            { name: "Server 2", url: "https://classicjoy.games/embed?slug=need-for-speed-carbon-own-the-city" }
                         ]
                     }
                 ]
             },
             {
-                group: "⚡ Pokémon Series",
-                disguiseGroup: "🧬 Biological Classification Modules",
+                group: "Pokémon Series",
+                disguiseGroup: "Biological Classification Modules",
                 items: [
+                    { 
+                        id: "pokemon-ruby",
+                        name: "Pokémon Ruby", 
+                        servers: [
+                            { name: "Server 1", url: "https://classicjoy.games/embed?slug=pokemon-ruby" }
+                        ]
+                    },
                     { 
                         id: "pokemon-sapphire",
                         name: "Pokémon Sapphire", 
                         servers: [
-                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Saphire/" }
+                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Saphire/" },
+                            { name: "Server 2", url: "https://classicjoy.games/embed?slug=pokemon-sapphire" }
+                        ]
+                    },
+                    { 
+                        id: "pokemon-emerald",
+                        name: "Pokémon Emerald", 
+                        servers: [
+                            { name: "Server 1", url: "https://classicjoy.games/embed?slug=pokemon-emeraid" }
                         ]
                     },
                     { 
@@ -1029,14 +1033,23 @@
                         id: "pokemon-firered",
                         name: "Pokémon FireRed", 
                         servers: [
-                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Fire-Red/" }
+                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Fire-Red/" },
+                            { name: "Server 2", url: "https://classicjoy.games/embed?slug=pokemon-fire-red-version-v1-1" }
                         ]
                     },
                     { 
                         id: "pokemon-leafgreen",
                         name: "Pokémon LeafGreen", 
                         servers: [
-                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Leaf-Green/" }
+                            { name: "Server 1 (Primary)", url: "https://algebra-skills-us.github.io/Leaf-Green/" },
+                            { name: "Server 2", url: "https://classicjoy.games/embed?slug=pokemon-leafgreen" }
+                        ]
+                    },
+                    { 
+                        id: "pokemon-elysium",
+                        name: "Pokémon Elysium", 
+                        servers: [
+                            { name: "Server 1", url: "https://classicjoy.games/embed?slug=pokemon-elysium" }
                         ]
                     },
                     { 
@@ -1049,8 +1062,8 @@
                 ]
             },
             {
-                group: "🍕 Papa Louis",
-                disguiseGroup: "💼 Management & Resource Logistics",
+                group: "Papa Louis",
+                disguiseGroup: "Management & Resource Logistics",
                 items: [
                     { 
                         id: "cherri",
@@ -1130,12 +1143,18 @@
             }
         ];
 
-        let isAcademicDisguiseActive = false;
-        let selectedServerIndex = 0;
-        let activeGameItem = null;
-        let currentActiveUrl = 'home';
-        let pendingModalBlobUrl = '';
-        let pendingModalHtmlContent = '';
+        // Restrict popups to ONLY allow about:blank and blob: destinations
+        (function enforcePopUpSafetyShield() {
+            const _origOpen = window.open;
+            window.open = function(url, target, features) {
+                const urlStr = String(url || '').trim().toLowerCase();
+                if (!url || urlStr === 'about:blank' || urlStr.startsWith('about:blank') || urlStr.startsWith('blob:')) {
+                    return _origOpen.call(window, url, target, features);
+                }
+                console.warn('[Security Shield] Blocked unauthorized pop-up attempt:', url);
+                return null;
+            };
+        })();
 
         function inflateCatalogOptions() {
             const select = document.getElementById('gameSelect');
@@ -1147,12 +1166,12 @@
             ENCODED_REGISTRY.forEach((cat, cIdx) => {
                 const group = document.createElement('optgroup');
                 group.className = 'dynamic-group';
-                group.label = isAcademicDisguiseActive ? cat.disguiseGroup : cat.group;
+                group.label = cat.group;
 
-                cat.items.forEach((item, iIdx) => {
+                cat.items.forEach((item) => {
                     const opt = document.createElement('option');
                     opt.value = item.id;
-                    opt.textContent = isAcademicDisguiseActive ? `Module ${cIdx+1}.${iIdx+1}: ${item.name.replace(/([A-Z])/g, ' $1').trim()}` : item.name;
+                    opt.textContent = item.name;
                     group.appendChild(opt);
                 });
 
@@ -1177,19 +1196,18 @@
             if (!gameItem || !gameItem.servers || gameItem.servers.length === 0) {
                 const opt = document.createElement('option');
                 opt.value = "";
-                opt.textContent = "🌐 Server Menu";
+                opt.textContent = "Server Menu";
                 serverSelect.appendChild(opt);
                 return;
             }
 
-            gameItem.servers.forEach((srv, idx) => {
+            gameItem.servers.forEach((srv) => {
                 const opt = document.createElement('option');
                 opt.value = srv.url;
                 opt.textContent = srv.name;
                 serverSelect.appendChild(opt);
             });
 
-            // Retain selected server index if within bounds, otherwise default to first server
             const targetIndex = (selectedServerIndex < gameItem.servers.length) ? selectedServerIndex : 0;
             serverSelect.selectedIndex = targetIndex;
         }
@@ -1202,6 +1220,12 @@
             const iframeWrapper = document.getElementById('iframe-wrapper');
 
             if (!homeView || !directoryView || !stealthView || !customView || !iframeWrapper) return;
+
+            // Memory cleanup for lower-end Chromebook RAM
+            const oldIframe = document.getElementById('game-iframe');
+            if (oldIframe) {
+                try { oldIframe.src = 'about:blank'; } catch(e){}
+            }
 
             homeView.style.display = 'none';
             directoryView.style.display = 'none';
@@ -1237,15 +1261,15 @@
                     updateServerDropdownForGame(gameItem);
 
                     const serverSelect = document.getElementById('serverSelect');
-                    const targetUrl = serverSelect.value || gameItem.servers[0].url;
+                    const targetUrl = (serverSelect && serverSelect.value) ? serverSelect.value : gameItem.servers[0].url;
                     currentActiveUrl = targetUrl;
 
                     iframeWrapper.style.display = 'block';
-                    iframeWrapper.innerHTML = `<iframe id="game-iframe" src="${targetUrl}" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" style="width:100%; height:100%; border:none;" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>`;
+                    iframeWrapper.innerHTML = `<iframe id="game-iframe" src="${targetUrl}" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads allow-popups allow-popups-to-escape-sandbox allow-modals" style="width:100%; height:100%; border:none;" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>`;
                 } else {
                     currentActiveUrl = val;
                     iframeWrapper.style.display = 'block';
-                    iframeWrapper.innerHTML = `<iframe id="game-iframe" src="${val}" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" style="width:100%; height:100%; border:none;" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>`;
+                    iframeWrapper.innerHTML = `<iframe id="game-iframe" src="${val}" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads allow-popups allow-popups-to-escape-sandbox allow-modals" style="width:100%; height:100%; border:none;" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>`;
                 }
             }
         }
@@ -1269,7 +1293,7 @@
                 const bannerSpan = statusBanner.querySelector('span');
                 const serverName = serverSelect ? serverSelect.options[serverSelect.selectedIndex].text : 'Selected Server';
                 if (bannerSpan) {
-                    bannerSpan.textContent = `🌐 Switched link to ${serverName}. Loading document...`;
+                    bannerSpan.textContent = `Switched link to ${serverName}. Loading document...`;
                 }
             }
         }
@@ -1317,14 +1341,9 @@
                 pageIcon = "https://en.wikipedia.org/static/favicon/wikipedia.ico";
             }
 
-            const encodedUrl = btoa(url);
-
-            const nativeOpen = (window.__NATIVE_SHIELD && window.__NATIVE_SHIELD.open) ? window.__NATIVE_SHIELD.open : window.open;
-            const win = nativeOpen('about:blank', '_blank');
+            const win = window.open('about:blank', '_blank');
             if (win) {
                 try { win.opener = null; } catch(e) {}
-
-                if (window.__applyDomSafety) window.__applyDomSafety(win);
 
                 const pageHtml = `
                     <!DOCTYPE html>
@@ -1346,35 +1365,36 @@
                         </style>
                         <script>
                             (function() {
-            // Freeze immutable references to original browser methods before any extension scripts run
-            const NATIVE = Object.freeze({
-                open: window.open.bind(window),
-                createElement: document.createElement.bind(document),
-                appendChild: Node.prototype.appendChild,
-                removeChild: Node.prototype.removeChild,
-                insertBefore: Node.prototype.insertBefore,
-                defineProperty: Object.defineProperty.bind(Object),
-                freeze: Object.freeze.bind(Object),
-                getOwnPropertyDescriptor: Object.getOwnPropertyDescriptor.bind(Object),
-                createObjectURL: (window.URL && window.URL.createObjectURL) ? window.URL.createObjectURL.bind(window.URL) : null,
-                addEventListener: window.addEventListener.bind(window),
-                removeEventListener: window.removeEventListener.bind(window)
-            });
+                                const _origOpen = window.open;
+                                window.open = function(u, t, f) {
+                                    const str = String(u || '').trim().toLowerCase();
+                                    if (!u || str === 'about:blank' || str.startsWith('about:blank') || str.startsWith('blob:')) {
+                                        return _origOpen.call(window, u, t, f);
+                                    }
+                                    console.warn('[Stealth Shield] Blocked external popup:', u);
+                                    return null;
+                                };
+                            })();
+                        <\/script>
+                    </head>
+                    <body>
+                        <div id="shield-host"></div>
+                        <div class="stealth-controls">
+                            <button class="stealth-btn" onclick="window.__reloadFrame()">Reload Game</button>
+                            <span style="color:rgba(255,255,255,0.4)">|</span>
+                            <button class="stealth-btn" onclick="window.location.replace('https://www.google.com')">Panic</button>
+                        </div>
+                        <script>
+                            (function() {
+                                const mode = "${isolationMode}";
+                                const panicKey = "${panicKey}";
+                                let targetUrl = "${url}";
 
-            // Restrict window.open to strictly permit only about:blank and blob: tabs
-            window.open = function(url, target, windowFeatures) {
-                const urlStr = String(url || '').trim().toLowerCase();
-                if (!url || urlStr === 'about:blank' || urlStr.startsWith('about:blank') || urlStr.startsWith('blob:')) {
-                    return NATIVE.open(url, target, windowFeatures);
-                }
-                console.warn('[Security Shield] Blocked pop-up attempt to unauthorized destination:', url);
-                return null;
-            };
-
-            function lockProperty(obj, prop, value) {
+                                const host = document.getElementById('shield-host');
+                                const iframe = document.createElement('iframe');
                                 iframe.id = "stealth-frame";
                                 iframe.setAttribute('data-target-url', targetUrl);
-                                iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads');
+                                iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads allow-popups allow-popups-to-escape-sandbox allow-modals');
                                 
                                 iframe.allow = 'fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map';
                                 iframe.setAttribute('allowfullscreen', 'true');
@@ -1383,7 +1403,7 @@
 
                                 function loadContent() {
                                     if (mode === "srcdoc") {
-                                        iframe.srcdoc = '<!DOCTYPE html><html><head><meta name="referrer" content="no-referrer"><style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;}iframe{width:100%;height:100%;border:none;}</style></head><body><iframe id="inner-frame" src="' + targetUrl + '" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true"></iframe></body></html>';
+                                        iframe.srcdoc = '<!DOCTYPE html><html><head><meta name="referrer" content="no-referrer"><style>html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;}iframe{width:100%;height:100%;border:none;}</style></head><body><iframe id="inner-frame" src="' + targetUrl + '" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads allow-popups allow-popups-to-escape-sandbox allow-modals" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true"></iframe></body></html>';
                                         if (!iframe.parentNode) host.appendChild(iframe);
                                     } else if (mode === "shadow") {
                                         const root = host.shadowRoot || host.attachShadow({ mode: 'closed' });
@@ -1416,7 +1436,8 @@
                                 };
 
                                 window.addEventListener('keydown', function(e) {
-                                    if (e.key === panicKey || e.code === panicKey) {
+                                    const isChromebookPanic = (panicKey === 'SearchEsc' && e.key === 'Escape' && (e.metaKey || e.altKey));
+                                    if (e.key === panicKey || e.code === panicKey || isChromebookPanic) {
                                         window.location.replace('https://www.google.com');
                                     } else if (e.key === 'F5' || (e.ctrlKey && e.key === 'r') || (e.altKey && e.key.toLowerCase() === 'r')) {
                                         e.preventDefault();
@@ -1431,8 +1452,7 @@
 
                 if (isolationMode === 'obfuscated') {
                     const blob = new Blob([pageHtml], { type: 'text/html;charset=utf-8' });
-                    const createObjectURL = (window.__NATIVE_SHIELD && window.__NATIVE_SHIELD.createObjectURL) ? window.__NATIVE_SHIELD.createObjectURL : URL.createObjectURL;
-                    const blobUrl = createObjectURL(blob);
+                    const blobUrl = URL.createObjectURL(blob);
                     win.location.href = blobUrl;
                 } else {
                     win.document.open();
@@ -1449,7 +1469,6 @@
             const win = window.open('about:blank', '_blank');
             if (win) {
                 try { win.opener = null; } catch(e) {}
-                if (window.__applyDomSafety) window.__applyDomSafety(win);
                 const pageHtml = `
                     <!DOCTYPE html>
                     <html>
@@ -1468,27 +1487,33 @@
                         </style>
                     </head>
                     <body>
-                        <iframe id="game-frame" data-target-url="${currentActiveUrl}" src="${currentActiveUrl}" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                        <iframe id="game-frame" data-target-url="${currentActiveUrl}" src="${currentActiveUrl}" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads allow-popups allow-popups-to-escape-sandbox allow-modals" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
                         <div class="tab-controls">
-                            <button class="tab-btn" onclick="reloadFrame()">🔄 Reload Game</button>
+                            <button class="tab-btn" onclick="reloadFrame()">Reload Game</button>
                             <span style="color:rgba(255,255,255,0.4)">|</span>
-                            <button class="tab-btn" onclick="toggleFS()">⛶ Fullscreen</button>
+                            <button class="tab-btn" onclick="toggleFS()">Fullscreen</button>
                         </div>
                         <script>
+                            function reloadFrame() {
+                                const frame = document.getElementById('game-frame');
+                                if (frame) {
+                                    try { frame.contentWindow.location.reload(); } catch(e) { frame.src = frame.src; }
+                                }
+                            }
+                            function toggleFS() {
+                                const frame = document.getElementById('game-frame');
+                                if (frame && frame.requestFullscreen) frame.requestFullscreen();
+                            }
                             (function() {
-                                try {
-                                    const _origOpen = window.open;
-                                    window.open = function(u, t, f) {
-                                        const str = String(u || '').trim().toLowerCase();
-                                        if (!u || str === 'about:blank' || str.startsWith('about:blank') || str.startsWith('blob:')) {
-                                            return _origOpen.call(window, u, t, f);
-                                        }
-                                        console.warn('[Stealth Shield] Blocked external popup:', u);
-                                        return null;
-                                    };
-                                    Object.defineProperty(window, 'open', { value: window.open, writable: false, configurable: false });
-                                    Object.defineProperty(Object.prototype, '__antiExtensionShield', { value: true, writable: false, configurable: false });
-                                } catch(e) {}
+                                const _origOpen = window.open;
+                                window.open = function(u, t, f) {
+                                    const str = String(u || '').trim().toLowerCase();
+                                    if (!u || str === 'about:blank' || str.startsWith('about:blank') || str.startsWith('blob:')) {
+                                        return _origOpen.call(window, u, t, f);
+                                    }
+                                    console.warn('[Stealth Shield] Blocked external popup:', u);
+                                    return null;
+                                };
                             })();
                         <\/script>
                     </body>
@@ -1501,18 +1526,16 @@
         }
 
         function populateDirectory() {
-            const select = document.getElementById('gameSelect');
             const dirGrid = document.getElementById('dirGrid');
-            if (!dirGrid || !select) return;
+            if (!dirGrid) return;
             
             dirGrid.innerHTML = '';
             
             ENCODED_REGISTRY.forEach((cat, index) => {
-                const groupLabel = isAcademicDisguiseActive ? cat.disguiseGroup : cat.group;
                 if (!cat.items || cat.items.length === 0) return;
 
                 const catCard = document.createElement('div');
-                catCard.className = 'category-accordion';
+                catCard.className = 'category-accordion collapsed';
                 catCard.id = 'cat-accordion-' + index;
 
                 const header = document.createElement('div');
@@ -1521,7 +1544,7 @@
                 header.innerHTML = `
                     <div class="category-title">
                         <span class="chevron">▼</span>
-                        <span>${groupLabel}</span>
+                        <span>${cat.group}</span>
                     </div>
                     <span class="category-count">${cat.items.length} ${cat.items.length === 1 ? 'item' : 'items'}</span>
                 `;
@@ -1542,7 +1565,7 @@
                     let serversListHtml = item.servers.map((s) => 
                         `<div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
                             <span><b>${s.name}:</b></span>
-                            <button class="btn" style="padding:2px 6px; font-size:0.7rem; height:auto;" onclick="switchGame('${item.id}'); switchGameServer('${s.url}');">Play</button>
+                            <button class="btn" style="padding:2px 6px; font-size:0.7rem; height:auto;" onclick="switchGame('${item.id}'); switchGameServer('${s.url}'); document.getElementById('gameSelect').value='${item.id}';">Play</button>
                          </div>`
                     ).join('');
 
@@ -1553,8 +1576,8 @@
                             ${serversListHtml}
                         </div>
                         <div class="dir-actions">
-                            <button class="btn dir-btn btn-primary" onclick="switchGame('${item.id}');">▶ Open Game</button>
-                            <button class="btn dir-btn" onclick="copyToClipboard('${primaryServer.url}', this)">📋 Copy URL</button>
+                            <button class="btn dir-btn btn-primary" onclick="switchGame('${item.id}'); document.getElementById('gameSelect').value='${item.id}';">Open Game</button>
+                            <button class="btn dir-btn" onclick="copyToClipboard('${primaryServer.url}', this)">Copy URL</button>
                         </div>
                     `;
                     grid.appendChild(card);
@@ -1569,49 +1592,47 @@
 
         function toggleCategory(catId) {
             const el = document.getElementById(catId);
-            if (el) {
-                el.classList.toggle('collapsed');
-            }
+            if (el) el.classList.toggle('collapsed');
         }
 
         function expandAllCategories() {
-            const accordions = document.querySelectorAll('.category-accordion');
-            accordions.forEach(acc => acc.classList.remove('collapsed'));
+            document.querySelectorAll('.category-accordion').forEach(acc => acc.classList.remove('collapsed'));
         }
 
         function collapseAllCategories() {
-            const accordions = document.querySelectorAll('.category-accordion');
-            accordions.forEach(acc => acc.classList.add('collapsed'));
+            document.querySelectorAll('.category-accordion').forEach(acc => acc.classList.add('collapsed'));
         }
 
+        let searchTimeout = null;
         function filterDirectory() {
-            const query = document.getElementById('dirSearch').value.toLowerCase().trim();
-            const accordions = document.querySelectorAll('.category-accordion');
-            
-            accordions.forEach(acc => {
-                const cards = acc.querySelectorAll('.dir-card');
-                let visibleCount = 0;
+            if (searchTimeout) clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const query = document.getElementById('dirSearch').value.toLowerCase().trim();
+                const accordions = document.querySelectorAll('.category-accordion');
+                
+                accordions.forEach(acc => {
+                    const cards = acc.querySelectorAll('.dir-card');
+                    let visibleCount = 0;
 
-                cards.forEach(card => {
-                    const title = card.getAttribute('data-title') || '';
-                    const url = card.getAttribute('data-url') || '';
-                    if (!query || title.includes(query) || url.includes(query)) {
-                        card.style.display = 'flex';
-                        visibleCount++;
+                    cards.forEach(card => {
+                        const title = card.getAttribute('data-title') || '';
+                        const url = card.getAttribute('data-url') || '';
+                        if (!query || title.includes(query) || url.includes(query)) {
+                            card.style.display = 'flex';
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    if (visibleCount > 0) {
+                        acc.style.display = 'block';
+                        if (query) acc.classList.remove('collapsed');
                     } else {
-                        card.style.display = 'none';
+                        acc.style.display = 'none';
                     }
                 });
-
-                if (visibleCount > 0) {
-                    acc.style.display = 'block';
-                    if (query) {
-                        acc.classList.remove('collapsed');
-                    }
-                } else {
-                    acc.style.display = 'none';
-                }
-            });
+            }, 60);
         }
 
         function copyToClipboard(text, btn) {
@@ -1625,12 +1646,10 @@
                 document.execCommand('copy');
                 if (btn) {
                     const origText = btn.textContent;
-                    btn.textContent = '✅ Copied!';
+                    btn.textContent = 'Copied!';
                     setTimeout(() => { btn.textContent = origText; }, 1800);
                 }
-            } catch (err) {
-                console.error('Clipboard copy failed:', err);
-            }
+            } catch (err) {}
             if (textarea.parentNode) {
                 try { textarea.parentNode.removeChild(textarea); } catch(e) {}
             }
@@ -1733,7 +1752,7 @@
 
                     if (iframeWrapper) {
                         iframeWrapper.style.display = 'block';
-                        iframeWrapper.innerHTML = `<iframe id="game-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" style="width:100%; height:100%; border:none;" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true"></iframe>`;
+                        iframeWrapper.innerHTML = `<iframe id="game-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads allow-popups allow-popups-to-escape-sandbox allow-modals" style="width:100%; height:100%; border:none;" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true"></iframe>`;
                         const iframe = document.getElementById('game-iframe');
                         iframe.srcdoc = content;
                     }
@@ -1760,11 +1779,11 @@
         function launchLocalFileInApp() {
             const fileInput = document.getElementById('localHtmlFile');
             if (!fileInput || !fileInput.files || !fileInput.files[0]) {
-                showFileStatus('⚠️ Please choose an HTML file first!', true);
+                showFileStatus('Please choose an HTML file first!', true);
                 return;
             }
             const file = fileInput.files[0];
-            showFileStatus('⌛ Reading file content...');
+            showFileStatus('Reading file content...');
 
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -1782,14 +1801,14 @@
 
                 if (iframeWrapper) {
                     iframeWrapper.style.display = 'block';
-                    iframeWrapper.innerHTML = `<iframe id="game-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" style="width:100%; height:100%; border:none;" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true"></iframe>`;
+                    iframeWrapper.innerHTML = `<iframe id="game-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads allow-popups allow-popups-to-escape-sandbox allow-modals" style="width:100%; height:100%; border:none;" allow="fullscreen; autoplay; gamepad; microphone; camera; pointer-lock; clipboard-write; keyboard-map" allowfullscreen="true"></iframe>`;
                     const iframe = document.getElementById('game-iframe');
                     iframe.srcdoc = content;
                 }
-                showFileStatus('✅ Loaded ' + file.name + ' into Workspace!');
+                showFileStatus('Loaded ' + file.name + ' into Workspace!');
             };
             reader.onerror = function() {
-                showFileStatus('❌ Error reading local file.', true);
+                showFileStatus('Error reading local file.', true);
             };
             reader.readAsText(file);
         }
@@ -1797,30 +1816,28 @@
         function launchLocalFileAboutBlank() {
             const fileInput = document.getElementById('localHtmlFile');
             if (!fileInput || !fileInput.files || !fileInput.files[0]) {
-                showFileStatus('⚠️ Please choose an HTML file first!', true);
+                showFileStatus('Please choose an HTML file first!', true);
                 return;
             }
             const file = fileInput.files[0];
-            showFileStatus('⌛ Processing file for about:blank...');
+            showFileStatus('Processing file for about:blank...');
 
             const reader = new FileReader();
             reader.onload = function(e) {
                 const content = e.target.result;
-                const nativeOpen = (window.__NATIVE_SHIELD && window.__NATIVE_SHIELD.open) ? window.__NATIVE_SHIELD.open : window.open;
-                const win = nativeOpen('about:blank', '_blank');
+                const win = window.open('about:blank', '_blank');
                 if (win) {
                     try { win.opener = null; } catch(err) {}
-                    if (window.__applyDomSafety) window.__applyDomSafety(win);
                     win.document.open();
                     win.document.write(content);
                     win.document.close();
-                    showFileStatus('🚀 Launched ' + file.name + ' in clean tab!');
+                    showFileStatus('Launched ' + file.name + ' in clean tab!');
                 } else {
-                    showFileStatus('❌ Pop-up blocked! Please allow pop-ups for this site.', true);
+                    showFileStatus('Pop-up blocked! Please allow pop-ups for this site.', true);
                 }
             };
             reader.onerror = function() {
-                showFileStatus('❌ Error reading local file.', true);
+                showFileStatus('Error reading local file.', true);
             };
             reader.readAsText(file);
         }
@@ -1828,12 +1845,11 @@
         function launchUrlAboutBlank() {
             let url = document.getElementById('customUrlInput').value.trim();
             if (!url) return;
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            if (!url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('about:') && !url.startsWith('blob:')) {
                 url = 'https://' + url;
             }
             const win = window.open('about:blank', '_blank');
             if (win) {
-                if (window.__applyDomSafety) window.__applyDomSafety(win);
                 const pageHtml = `
                     <!DOCTYPE html>
                     <html>
@@ -1852,9 +1868,9 @@
                         </style>
                     </head>
                     <body>
-                        <iframe id="custom-frame" src="${url}" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" style="width:100vw;height:100vh;border:none;margin:0;padding:0;" allow="fullscreen; autoplay; gamepad"></iframe>
+                        <iframe id="custom-frame" src="${url}" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads allow-popups allow-popups-to-escape-sandbox allow-modals" style="width:100vw;height:100vh;border:none;margin:0;padding:0;" allow="fullscreen; autoplay; gamepad"></iframe>
                         <div class="tab-controls">
-                            <button class="tab-btn" onclick="reloadFrame()">🔄 Reload Game</button>
+                            <button class="tab-btn" onclick="reloadFrame()">Reload Game</button>
                         </div>
                         <script>
                             function reloadFrame() {
@@ -1884,64 +1900,19 @@
         function launchAboutBlank() {
             const code = document.getElementById('customHtmlInput').value;
             if (!code) return;
-            const nativeOpen = (window.__NATIVE_SHIELD && window.__NATIVE_SHIELD.open) ? window.__NATIVE_SHIELD.open : window.open;
-            const win = nativeOpen('about:blank', '_blank');
+            const win = window.open('about:blank', '_blank');
             if (win) {
-                if (window.__applyDomSafety) window.__applyDomSafety(win);
                 win.document.open();
                 win.document.write(code);
                 win.document.close();
             }
         }
 
-        (function enforceAntiTamperShield() {
-            const cloakingMethods = {
-                launchStealth: launchStealth,
-                switchGame: switchGame,
-                switchGameServer: switchGameServer,
-                openActiveInAboutBlank: openActiveInAboutBlank,
-                launchUrlAboutBlank: launchUrlAboutBlank,
-                launchLocalFileAboutBlank: launchLocalFileAboutBlank,
-                launchAboutBlank: launchAboutBlank
-            };
-
-            const lock = (window.__NATIVE_SHIELD && window.__NATIVE_SHIELD.defineProperty) 
-                ? window.__NATIVE_SHIELD.defineProperty 
-                : Object.defineProperty;
-
-            Object.keys(cloakingMethods).forEach(methodName => {
-                try {
-                    lock(window, methodName, {
-                        value: cloakingMethods[methodName],
-                        writable: false,
-                        configurable: false,
-                        enumerable: true
-                    });
-                } catch(e) {
-                    window[methodName] = cloakingMethods[methodName];
-                }
-            });
-
-            setInterval(() => {
-                Object.keys(cloakingMethods).forEach(methodName => {
-                    if (window[methodName] !== cloakingMethods[methodName]) {
-                        try {
-                            lock(window, methodName, {
-                                value: cloakingMethods[methodName],
-                                writable: false,
-                                configurable: false,
-                                enumerable: true
-                            });
-                        } catch(e) {
-                            window[methodName] = cloakingMethods[methodName];
-                        }
-                    }
-                });
-            }, 500);
-
+        // Initialize App on DOM Load
+        window.onload = function() {
             inflateCatalogOptions();
             populateDirectory();
-        })();
+        };
 
         // Prevent accidental closing or navigating away from the page
         window.addEventListener('beforeunload', function (e) {
